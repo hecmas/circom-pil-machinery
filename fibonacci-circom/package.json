@@ -1,0 +1,28 @@
+{
+  "name": "pilexample_plonk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "circom --O1 --prime goldilocks --r1cs --wasm --sym -o build circuits/fibonacci.circom",
+    "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/witness.wtns",
+    "circom2pil": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -c build/fibonacci.const -e build/fibonacci.exec",
+    "pil_exec": "node node_modules/pil-stark/src/main_plonkexec.js -w build/witness.wtns -p build/fibonacci.pil -e build/fibonacci.exec -m build/fibonacci.commit",
+    "pil_verify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -p build/fibonacci.pil -c build/fibonacci.const",
+    "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p build/fibonacci.pil -s src/fibonacci.starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit -c build/fibonacci.const -t build/fibonacci.consttree -p build/fibonacci.pil -s src/fibonacci.starkstruct.json -o build/proof.json -z build/proof.zkin.json -b build/public.json --proverAddr 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p build/fibonacci.pil -s src/circuit.starkstruct.json -v build/fibonacci.verkey.json -o build/proof.json -b build/public.json",
+    "g16gen": "node node_modules/pil-stark/src/main_pil2circom.js -p build/fibonacci.pil -s src/fibonacci.starkstruct.json -v build/fibonacci.verkey.json -o build/verifier.circom",
+    "g16compile": "circom build/verifier.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits -o build",
+    "g16wc": "snarkjs wc build/verifier_js/verifier.wasm build/proof.zkin.json build/verifier.wtns"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "pil-stark": "^0.0.25",
+    "pilcom": "^0.0.18",
+    "tmp-promise": "^3.0.3",
+    "yargs": "^17.5.1"
+  }
+}
