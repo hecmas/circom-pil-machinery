@@ -1,1 +1,17 @@
-# circom-pil-machinery
+# Circom PIL Machinery
+
+## Introduction
+
+This repo contains a serie of simple examples showing how Circom and PIL can be combined in order to achieve the following:
+1. **Basic**: Generate a (zk)-SNARK from a circuit description with Circom.
+1. **Basic**: Generate a STARK from a state machine description with PIL.
+1. **Medium**: Generate a STARK from a circuit description with Circom.
+1. **Medium**: Generate a (zk)-SNARK from a state machine description with PIL. 
+1. **Advanced**: Generate a (zk)-SNARK of a STARK from either Circom or PIL.
+2. **Advanced**: Generate a STARK of a SNARK from either Circom or PIL.
+
+Under the understanding of each of the previous proof generation mechanisms one can perform deeper proof compositions such as a (zk)-SNARK of a STARK of a STARK or viceversa.
+
+> The examples are so simple to be useful for a practical setting. However, the very same workaround can be used with almost no effort to complex circuits like [circom-ecdsa](https://github.com/0xPARC/circom-ecdsa).
+
+## Description of the Examples
