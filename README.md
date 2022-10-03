@@ -3,6 +3,7 @@
 ## Introduction
 
 This repo contains a serie of simple examples showing how Circom and PIL can be combined in order to achieve the following.
+
 **Basic:**
 1.  [circom-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/circom-SNARK): Generate a (zk)-SNARK from a circuit description with Circom.
 1. [PIL-STARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-STARK): Generate a STARK from a state machine description with PIL.
