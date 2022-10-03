@@ -1,0 +1,16 @@
+{
+  "name": "circom-snark",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "circuitcompile": "circom src/fibonacci.circom --r1cs --wasm --sym -o build",
+    "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
+    "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
+    "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
+    "plonkproof": "snarkjs pkp build/fibonacci.zkey build/fibonacci.wtns build/fibonacci-proof.json build/fibonacci-public.json",
+    "plonkverify": "snarkjs pkv build/fibonacci-vk.json build/fibonacci-public.json build/fibonacci-proof.json"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC"
+}
