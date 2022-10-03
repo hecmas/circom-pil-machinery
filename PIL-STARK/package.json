@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "smcompile": "pilcom src/fibonacci.pil -o build/fibonacci.json",
     "buildconst": "node src/main_buildconst.js -o build/fibonacci.const.bin",
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
     "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
@@ -14,7 +13,7 @@
   "author": "Héctor Masip Ardevol",
   "license": "ISC",
   "dependencies": {
-    "pil-stark": "^0.0.25"
+    "pil-stark": "^0.0.26"
   },
   "devDependencies": {
     "chai": "^4.3.6",
