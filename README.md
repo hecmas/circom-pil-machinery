@@ -2,13 +2,18 @@
 
 ## Introduction
 
-This repo contains a serie of simple examples showing how Circom and PIL can be combined in order to achieve the following:
-1. [circom-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/circom-SNARK): Generate a (zk)-SNARK from a circuit description with Circom.
-2. [PIL-STARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-STARK): Generate a STARK from a state machine description with PIL.
-3. [circom-STARK](https://github.com/hecmas/circom-pil-machinery/tree/main/circom-STARK): Generate a STARK from a circuit description with Circom.
-4. [PIL-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-SNARK): Generate a (zk)-SNARK from a state machine description with PIL. 
-5. **Advanced**: Generate a (zk)-SNARK of a STARK from either Circom or PIL.
-6. **Advanced**: Generate a STARK of a SNARK from either Circom or PIL.
+This repo contains a serie of simple examples showing how Circom and PIL can be combined in order to achieve the following.
+**Basic:**
+1.  [circom-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/circom-SNARK): Generate a (zk)-SNARK from a circuit description with Circom.
+1. [PIL-STARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-STARK): Generate a STARK from a state machine description with PIL.
+
+**Intermediate:**
+1. [circom-STARK](https://github.com/hecmas/circom-pil-machinery/tree/main/circom-STARK): Generate a STARK from a circuit description with Circom.
+1. [PIL-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-SNARK): Generate a (zk)-SNARK from a state machine description with PIL. 
+
+**Advanced:**
+1. [TODO](): Generate a (zk)-SNARK of a STARK from either Circom or PIL.
+1. [TODO](): Generate a STARK of a SNARK from either Circom or PIL.
 
 Under the understanding of each of the previous proof generation mechanisms one can perform deeper proof compositions such as a (zk)-SNARK of a STARK of a STARK or viceversa.
 
