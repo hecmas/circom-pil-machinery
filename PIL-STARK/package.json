@@ -1,0 +1,23 @@
+{
+  "name": "pil-stark",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "smcompile": "pilcom src/fibonacci.pil -o build/fibonacci.json",
+    "buildconst": "node src/main_buildconst.js -o build/fibonacci.const.bin",
+    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
+    "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit.bin -c build/fibonacci.const.bin -t build/fibonacci.consttree.bin -p src/fibonacci.pil -s src/starkstruct.json -o build/fibonacci-proof.json -z build/fibonacci-proof.zkin.json -b build/fibonacci-public.json",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci-proof.json -b build/fibonacci-public.json"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC",
+  "dependencies": {
+    "pil-stark": "^0.0.25"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "yargs": "^17.6.0"
+  }
+}
