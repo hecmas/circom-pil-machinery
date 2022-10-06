@@ -13,8 +13,8 @@ This repo contains a serie of simple examples showing how Circom and PIL can be 
 1. [PIL-SNARK](https://github.com/hecmas/circom-pil-machinery/tree/main/PIL-SNARK): Generate a (zk)-SNARK from a state machine description with PIL. 
 
 **Advanced:**
-1. [TODO](): Generate a (zk)-SNARK of a STARK from either Circom or PIL.
-1. [TODO](): Generate a STARK of a SNARK from either Circom or PIL.
+1. [SN-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/SN-ST): Generate a (zk)-SNARK of a STARK from either Circom or PIL.
+1. [ST-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/ST-SN): Generate a STARK of a SNARK from either Circom or PIL.
 
 Under the understanding of each of the previous proof generation mechanisms one can perform deeper proof compositions such as a (zk)-SNARK of a STARK of a STARK or viceversa.
 
