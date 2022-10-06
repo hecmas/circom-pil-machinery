@@ -8,7 +8,7 @@
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
     "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
     "pil2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci.circom",
-    "circuitcompile": "circom build/fibonacci.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits -o build",
+    "circuitcompile": "circom build/fibonacci.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/pil-stark/circuits.gl -o build",
     "witnesscomputation": "snarkjs wc build/verifier_js/verifier.wasm build/proof.zkin.json build/verifier.wtns",
     "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
     "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
