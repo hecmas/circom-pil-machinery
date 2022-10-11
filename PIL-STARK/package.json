@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildconst": "node src/main_buildconst.js -o build/fibonacci.const.bin",
+    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const.bin",
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
     "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
     "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit.bin -c build/fibonacci.const.bin -t build/fibonacci.consttree.bin -p src/fibonacci.pil -s src/starkstruct.json -o build/fibonacci-proof.json -z build/fibonacci-proof.zkin.json -b build/fibonacci-public.json",

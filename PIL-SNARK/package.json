@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildconst": "node src/main_buildconst.js -o build/fibonacci.const.bin",
+    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const.bin",
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
     "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
     "pil2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci.circom",

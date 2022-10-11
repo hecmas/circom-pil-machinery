@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "circuitcompile": "circom src/fibonacci.circom --r1cs --wasm --sym -o build",
+    "circuitcompile": "mkdir -p build && circom src/fibonacci.circom --r1cs --wasm --sym -o build",
     "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
     "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
     "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
