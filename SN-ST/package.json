@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "circuitcompile1": "mkdir -p build && circom --O1 --prime goldilocks --r1cs --wasm --sym -o build src/fibonacci.circom",
+    "circuitcompile1": "mkdir -p build && circom src/fibonacci.circom --O1 --prime goldilocks --r1cs --wasm --sym -o build",
     "witnesscomputation1": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
     "circom2pil_const": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -c build/fibonacci.const -e build/fibonacci.exec",
     "pilexec_commit": "node node_modules/pil-stark/src/main_plonkexec.js -w build/fibonacci.wtns -p build/fibonacci.pil -e build/fibonacci.exec -m build/fibonacci.commit",
@@ -13,7 +13,7 @@
     "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit -c build/fibonacci.const -t build/fibonacci.consttree -p build/fibonacci.pil -s src/starkstruct.json -o build/fibonacci-proof.json -z build/fibonacci-proof.zkin.json -b build/fibonacci-public.json",
     "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p build/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci-proof.json -b build/fibonacci-public.json",
     "pil2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p build/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/verifier.circom",
-    "circuitcompile2": "circom build/verifier.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/pil-stark/circuits.gl -o build",
+    "circuitcompile2": "circom build/verifier.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits -o build",
     "witnesscomputation2": "snarkjs wc build/verifier_js/verifier.wasm build/proof.zkin.json build/verifier.wtns",
     "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
     "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
