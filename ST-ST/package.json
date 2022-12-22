@@ -1,0 +1,31 @@
+{
+  "name": "st-sn",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pilcom": "node node_modules/pilcom/src/pil.js src/fibonacci.pil -o build/fibonacci.pil.json",
+    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const.bin",
+    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
+    "buildconsttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
+    "starksetup": "node node_modules/pil-stark/src/main_genstarkinfo.js -p src/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit.bin -c build/fibonacci.const.bin -t build/fibonacci.consttree.bin -p build/fibonacci.pil.json -s src/starkstruct.json -o build/fibonacci-proof.json -z build/fibonacci-proof.zkin.json -b build/fibonacci-public.json",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci-proof.json -b build/fibonacci-public.json",
+    "pil2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -v build/fibonacci.verkey.json -s src/starkstruct.json -o build/STARK-verifier.circom",
+    "circuitcompile": "circom build/STARK-verifier.circom --r1cs --wasm --sym -l node_modules/circomlib/circuits -l node_modules/pil-stark/circuits.bn128 -o build",
+    "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input2.json build/fibonacci.wtns",
+    "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
+    "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
+    "plonkproof": "snarkjs pkp build/fibonacci.zkey build/fibonacci.wtns build/fibonacci-proof.json build/fibonacci-public.json",
+    "plonkverify": "snarkjs pkv build/fibonacci-vk.json build/fibonacci-public.json build/fibonacci-proof.json"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC",
+  "dependencies": {
+    "pil-stark": "^0.0.48"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "yargs": "^17.6.0"
+  }
+}
