@@ -1,5 +1,5 @@
 {
-  "name": "circom-stark",
+  "name": "circuit-stark",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
