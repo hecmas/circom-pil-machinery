@@ -6,8 +6,8 @@
   "scripts": {
     "circuitcompile": "mkdir -p build && circom src/fibonacci.circom --O1 --prime goldilocks --r1cs --wasm --sym -o build/",
     "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
-    "circom2pil": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -e build/fibonacci.exec -c build/fibonacci.const",
-    "generatecommit": "node node_modules/pil-stark/src/main_plonkexec.js -w build/fibonacci.wtns -p build/fibonacci.pil -e build/fibonacci.exec -m build/fibonacci.commit",
+    "circuit2sm": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -e build/fibonacci.exec -c build/fibonacci.const",
+    "buildcommit": "node node_modules/pil-stark/src/main_plonkexec.js -w build/fibonacci.wtns -p build/fibonacci.pil -e build/fibonacci.exec -m build/fibonacci.commit",
     "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -p build/fibonacci.pil -c build/fibonacci.const",
     "buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
     "buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p build/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",

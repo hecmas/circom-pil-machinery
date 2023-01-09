@@ -18,7 +18,7 @@ module.exports.execute = async function (pols, input) {
 
     const N = pols.a0.length;
 
-    pols.a0[0] = BigInt(input[1]);
+    pols.a0[0] = BigInt(input[0]);
     pols.a1[0] = BigInt(input[1]);
 
     for (let i=1; i<N; i++) {
