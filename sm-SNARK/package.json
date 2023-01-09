@@ -9,7 +9,7 @@
     "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -c build/fibonacci.const -p src/fibonacci.pil",
     "buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p src/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
     "buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",
-    "sm2circuit": "node node_modules/pil-stark/src/main_pil2circom.js --verkeyInput -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.circom",
+    "sm2circuit": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.circom",
     "circuitcompile": "circom build/fibonacci.circom --r1cs --wasm --sym -o build -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits",
     "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
     "downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_20.ptau -O build/powersOfTau.ptau",
