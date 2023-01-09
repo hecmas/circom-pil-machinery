@@ -9,8 +9,8 @@
     "downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_10.ptau -O build/powersOfTau.ptau",
     "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
     "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
-    "plonkproof": "snarkjs pkp build/fibonacci.zkey build/fibonacci.wtns build/fibonacci-proof.json build/fibonacci-public.json",
-    "plonkverify": "snarkjs pkv build/fibonacci-vk.json build/fibonacci-public.json build/fibonacci-proof.json"
+    "plonkproof": "snarkjs pkp build/fibonacci.zkey build/fibonacci.wtns build/fibonacci.proof.json build/fibonacci.public.json",
+    "plonkverify": "snarkjs pkv build/fibonacci-vk.json build/fibonacci.public.json build/fibonacci.proof.json"
   },
   "author": "Héctor Masip Ardevol",
   "license": "ISC"

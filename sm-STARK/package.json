@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const.bin",
-    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit.bin",
-    "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const.bin -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree.bin -v build/fibonacci.verkey.json",
-    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit.bin -c build/fibonacci.const.bin -t build/fibonacci.consttree.bin -p src/fibonacci.pil -s src/starkstruct.json -o build/fibonacci.proof.json -z build/fibonacci.zkin.json -b build/fibonacci.public.json",
-    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/fibonacci.pil -s src/starkstruct.json -v build/fibonacci.verkey.json -o build/fibonacci-proof.json -b build/fibonacci-public.json"
+    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const",
+    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit",
+    "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -p src/fibonacci.pil -c build/fibonacci.const",
+    "buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p src/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
+    "buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit -c build/fibonacci.const -t build/fibonacci.consttree -p src/fibonacci.pil -s build/starkinfo.json -o build/fibonacci.proof.json -z build/fibonacci.zkin.json -b build/fibonacci.public.json",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.proof.json -b build/fibonacci.public.json"
   },
   "author": "Héctor Masip Ardevol",
   "license": "ISC",
