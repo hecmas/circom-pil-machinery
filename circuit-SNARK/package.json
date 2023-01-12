@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compilecircom": "mkdir -p build && circom src/fibonacci.circom --r1cs --wasm --sym -o build",
+    "compilecircom": "mkdir -p build && circom src/fibonacci.circom --r1cs --wasm -o build",
     "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
     "downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_10.ptau -O build/powersOfTau.ptau",
     "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",

@@ -12,14 +12,13 @@ This repo contains a serie of simple examples showing how Circom and PIL can be 
 
 **Depth 1 Recursion:**
 1. [circuit-SN-ST](): Generate a STARK of a SNARK from an arithmetic circuit described in Circom. **Not implemented**
-2. [circuit-ST-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/circuit-ST-SN): Generate a (zk)-SNARK of a STARK from an arithmetic circuit described in Circom.
-3. [circuit-SN-SN](): Generate a (zk-)SNARK of a SNARK from an arithmetic circuit described in Circom. **Not implemented**
-4. [circuit-ST-ST](): Generate a STARK of a STARK from an arithmetic circuit described in Circom. **Not implemented**
-5. [sm-SN-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a STARK of a SNARK from a state machine described in PIL. **This cannot be done yet, one needs to go through generating a STARK before being able to generate the SNARK**
-6. [sm-ST-SN](): Generate a (zk-)SNARK of a STARK from a state machine described in PIL. **Not implemented**
-7. [sm-SN-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a (zk-)SNARK of a SNARK from a state machine described in PIL. **Not implemented**
-8. [sm-ST-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a STARK of a STARK from a state machine described in PIL.
-
+1. [circuit-ST-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/circuit-ST-SN): Generate a (zk)-SNARK of a STARK from an arithmetic circuit described in Circom.
+1. [circuit-SN-SN](): Generate a (zk-)SNARK of a SNARK from an arithmetic circuit described in Circom. **Not implemented**
+1. [circuit-ST-ST](): Generate a STARK of a STARK from an arithmetic circuit described in Circom. **Not implemented**
+1. [sm-SN-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a STARK of a SNARK from a state machine described in PIL. **This cannot be done yet, one needs to go through generating a STARK before being able to generate the SNARK**
+1. [sm-ST-SN](): Generate a (zk-)SNARK of a STARK from a state machine described in PIL. **Not implemented**
+1. [sm-SN-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a (zk-)SNARK of a SNARK from a state machine described in PIL. **Not implemented**
+1. [sm-ST-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a STARK of a STARK from a state machine described in PIL.
 
 Under the understanding of each of the previous proof generation mechanisms one can perform deeper proof compositions such as a (zk)-SNARK of a STARK of a STARK or viceversa.
 
