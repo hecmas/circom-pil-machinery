@@ -23,7 +23,7 @@
   "author": "Héctor Masip Ardevol",
   "license": "ISC",
   "dependencies": {
-    "pil-stark": "^0.0.48"
+    "pil-stark": "^0.0.55"
   },
   "devDependencies": {
     "chai": "^4.3.6",
