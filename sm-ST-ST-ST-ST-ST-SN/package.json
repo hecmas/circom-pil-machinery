@@ -1,0 +1,72 @@
+{
+  "name": "st-sn",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "buildconst": "mkdir -p build && node src/main_buildconst.js -o build/fibonacci.const",
+    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/fibonacci.commit",
+    "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -c build/fibonacci.const -p src/fibonacci.pil",
+    "buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p src/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
+    "buildchelpers": "node_modules/pil-stark/src/main_buildchelpers.js -m -p src/fibonacci.pil -s build/starkinfo.json -c build/fibonacci.chelpers.cpp -C ZkevmSteps",
+    "buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/fibonacci.commit -c build/fibonacci.const -t build/fibonacci.consttree -p src/fibonacci.pil -s build/starkinfo.json -o build/fibonacci.proof.json -z build/fibonacci.zkin.json -b build/fibonacci.public.json",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.proof.json -b build/fibonacci.public.json",
+    "verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.verifier.circom",
+    "compilecircom": "circom --O1 --prime goldilocks --r1cs --wasm --c build/fibonacci.verifier.circom -o build -l node_modules/pil-stark/circuits.gl",
+    
+    "c12a:setup": "node node_modules/pil-stark/src/compressor12/main_compressor12_setup.js  -r build/fibonacci.verifier.r1cs  -p build/c12a.pil -c build/c12a.const -e build/c12a.exec",
+    "c12a:buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/c12a.pil -s src/c12a.starkstruct.json -i build/c12a.starkinfo.json",
+    "c12a:buildchelpers": "node node_modules/pil-stark/src/main_buildchelpers.js -m -p build/c12a.pil -s build/c12a.starkinfo.json -c build/c12a.chelpers/c12a.chelpers.cpp -C C12aSteps",
+    "c12a:buildcommit": "node node_modules/pil-stark/src/compressor12/main_compressor12_exec.js -i build/fibonacci.zkin.json -w build/fibonacci.verifier_js/fibonacci.verifier.wasm -p build/c12a.pil -e build/c12a.exec -m build/c12a.commit",
+    "c12a:pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/c12a.commit -c build/c12a.const -p build/c12a.pil",
+    "c12a:buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/c12a.const -p build/c12a.pil -s src/c12a.starkstruct.json -t build/c12a.consttree -v build/c12a.verkey.json",
+    "c12a:starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/c12a.commit -c build/c12a.const -t build/c12a.consttree -p build/c12a.pil -s build/c12a.starkinfo.json -o build/c12a.proof.json -z build/c12a.zkin.proof.json -b build/c12a.public.json",
+    "c12a:starkverify": "node node_modules/pil-stark/src/main_verifier.js -p build/c12a.pil -s build/c12a.starkinfo.json -o build/c12a.proof.json -b build/c12a.public.json -v build/c12a.verkey.json",
+    "c12a:verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js --skipMain -p build/c12a.pil -s build/c12a.starkinfo.json -v build/c12a.verkey.json -o build/c12a.verifier.circom",
+    
+    "recursive1:gencircom": "cp node_modules/zkevm-proverjs/recursive/recursive1.circom build",
+    "recursive1:compilecircom": "circom --O1 --prime goldilocks --r1cs --wasm --c build/recursive1.circom -o build -l node_modules/pil-stark/circuits.gl",
+    "recursive1:setup": "node node_modules/pil-stark/src/compressor12/main_compressor12_setup.js -r build/recursive1.r1cs -p build/recursive1.pil -c build/recursive1.const -e build/recursive1.exec",
+    "recursive1:buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/recursive1.pil -s src/recursive.starkstruct.json -i build/recursive1.starkinfo.json",
+    "recursive1:buildchelpers": "node node_modules/pil-stark/src/main_buildchelpers.js -m -p build/recursive1.pil -s build/recursive1.starkinfo.json -c build/recursive1.chelpers/recursive1.chelpers.cpp -C Recursive1Steps",
+    "recursive1:buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/recursive1.const -p build/recursive1.pil -s src/recursive.starkstruct.json -t build/recursive1.consttree -v build/recursive1.verkey.json",
+    "recursive1:verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js --skipMain --verkeyInput -p build/recursive1.pil -s build/recursive1.starkinfo.json -v build/recursive1.verkey.json -o build/recursive1.verifier.circom",
+
+    "recursive2:gencircom": "node node_modules/zkevm-proverjs/src/main_genrecursive.js -v build/recursive1.verkey.json -o build/recursive2.circom",
+    "recursive2:compilecircom": "circom --O1 --prime goldilocks --r1cs --wasm --c build/recursive2.circom -o build -l node_modules/pil-stark/circuits.gl",
+    "recursive2:setup": "node node_modules/pil-stark/src/compressor12/main_compressor12_setup.js -r build/recursive2.r1cs -p build/recursive2.pil -c build/recursive2.const -e build/recursive2.exec",
+    "recursive2:buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/recursive2.pil -s src/recursive.starkstruct.json -i build/recursive2.starkinfo.json",
+    "recursive2:buildchelpers": "node node_modules/pil-stark/src/main_buildchelpers.js -m -p build/recursive2.pil -s build/recursive2.starkinfo.json -c build/recursive2.chelpers/recursive2.chelpers.cpp -C Recursive2Steps",
+    "recursive2:buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/recursive2.const -p build/recursive2.pil -s src/recursive.starkstruct.json -t build/recursive2.consttree -v build/recursive2.verkey.json",
+    "recursive2:verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js --skipMain --verkeyInput -p build/recursive2.pil -s build/recursive2.starkinfo.json -v build/recursive2.verkey.json -o build/recursive2.verifier.circom",
+
+    "recursivef:gencircom": "node node_modules/zkevm-proverjs/src/main_genrecursivef.js --verkey1 build/recursive1.verkey.json --verkey2 build/recursive2.verkey.json -o build/recursivef.circom",
+    "recursivef:compilecircom": "circom --O1 --prime goldilocks --r1cs --wasm --c build/recursivef.circom -o build -l node_modules/pil-stark/circuits.gl -l node_modules/circomlib/circuits",
+    "recursivef:setup": "node node_modules/pil-stark/src/compressor12/main_compressor12_setup.js -r build/recursivef.r1cs -p build/recursivef.pil -c build/recursivef.const -e build/recursivef.exec",
+    "recursivef:buildstarkinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/recursivef.pil -s src/recursivef.starkstruct.json -i build/recursivef.starkinfo.json",
+    "recursivef:buildchelpers": "node node_modules/pil-stark/src/main_buildchelpers.js -m -p build/recursivef.pil -s build/recursivef.starkinfo.json -c build/recursivef.chelpers/recursivef.chelpers.cpp -C StarkRecursiveFSteps",
+    "recursivef:buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/recursivef.const -p build/recursivef.pil -s src/recursivef.starkstruct.json -t build/recursivef.consttree -v build/recursivef.verkey.json",
+    "recursivef:verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js --skipMain -p build/recursivef.pil -s build/recursivef.starkinfo.json -v build/recursivef.verkey.json -o build/recursivef.verifier.circom",
+
+    "final:gencircom": "cp node_modules/zkevm-proverjs/recursive/final.circom build",
+    "final:compilecircom": "circom --r1cs --wasm --c build/final.circom -o build -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits",
+
+    "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input2.json build/fibonacci.wtns",
+    "plonksetup": "snarkjs pks build/fibonacci.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
+    "plonkvk": "snarkjs zkev build/fibonacci.zkey build/fibonacci-vk.json",
+    "plonkproof": "snarkjs pkp build/fibonacci.zkey build/fibonacci.wtns build/fibonacci.proof.json build/fibonacci.public.json",
+    "plonkverify": "snarkjs pkv build/fibonacci-vk.json build/fibonacci.public.json build/fibonacci.proof.json"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC",
+  "dependencies": {
+    "pil-stark": "^0.0.55",
+    "zkevm-proverjs": "https://github.com/0xPolygonHermez/zkevm-proverjs.git"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "tmp-promise": "^3.0.3",
+    "yargs": "^17.6.0"
+  }
+}

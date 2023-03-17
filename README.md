@@ -20,6 +20,9 @@ This repo contains a serie of simple examples showing how Circom and PIL can be 
 7. sm-SN-SN: Generate a (zk-)SNARK of a SNARK from a state machine described in PIL. **Not doable**
 8. [sm-ST-ST](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-SN-ST): Generate a STARK of a STARK from a state machine described in PIL.
 
+**Unlimited Depth Recursion:**
+1. [sm-ST-ST-ST-ST-ST-SN](https://github.com/hecmas/circom-pil-machinery/tree/main/sm-ST-ST-ST-ST-ST-SN): Generate a STARK of a STARK of a STARK of a STARK of a STARK of a (zk-)SNARK from a state machine described in PIL.
+
 Under the understanding of each of the previous proof generation mechanisms one can perform deeper proof compositions such as a (zk)-SNARK of a STARK of a STARK or viceversa.
 
 > The examples are so simple to be useful for a practical setting. However, the very same workaround can be used with almost no effort to complex circuits like [circom-ecdsa](https://github.com/0xPARC/circom-ecdsa).
