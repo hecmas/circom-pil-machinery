@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "stark:circuitcompile": "mkdir -p build && circom --O1 --prime goldilocks --r1cs --sym --wasm --c --verbose src/fibonacci.circom -o build",
+    "stark:circuitcompile": "mkdir -p build && circom src/fibonacci.circom --O1 --prime goldilocks --r1cs --wasm -o build",
     "stark:witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
-    "stark:circuit2sm": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -c build/fibonacci.const -e build/fibonacci.exec",
+    "stark:circuit2sm": "node node_modules/pil-stark/src/main_plonksetup.js -r build/fibonacci.r1cs -p build/fibonacci.pil -e build/fibonacci.exec -c build/fibonacci.const",
     "stark:buildcommit": "node node_modules/pil-stark/src/main_plonkexec.js -w build/fibonacci.wtns -p build/fibonacci.pil -e build/fibonacci.exec -m build/fibonacci.commit",
     "stark:pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/fibonacci.commit -p build/fibonacci.pil -c build/fibonacci.const",
     "stark:buildinfo": "node node_modules/pil-stark/src/main_genstarkinfo.js -p build/fibonacci.pil -s src/starkstruct.json -i build/starkinfo.json",
@@ -15,10 +15,10 @@
     "stark:verify": "node node_modules/pil-stark/src/main_verifier.js -p build/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.proof.json -b build/fibonacci.public.json",
     
     "verifier2circom": "node node_modules/pil-stark/src/main_pil2circom.js -p build/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/verifier.circom",
-    "circuitcompile": "circom build/verifier.circom --r1cs --wasm --sym -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits -o build",
+    "circuitcompile": "circom build/verifier.circom --r1cs --wasm -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits -o build",
     "witnesscomputation": "snarkjs wc build/verifier_js/verifier.wasm build/fibonacci.zkin.json build/verifier.wtns",
     
-    "snark:downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_15.ptau -O build/powersOfTau.ptau",
+    "snark:downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_16.ptau -O build/powersOfTau.ptau",
     "snark:plonksetup": "snarkjs pks build/verifier.r1cs build/powersOfTau.ptau build/fibonacci.zkey",
     "snark:plonkvk": "snarkjs zkev build/veirifer.zkey build/veirifer-vk.json",
     "snark:plonkproof": "snarkjs pkp build/veirifer.zkey build/veirifer.wtns build/veirifer.proof.json build/veirifer.public.json",

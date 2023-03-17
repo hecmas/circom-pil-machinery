@@ -11,7 +11,7 @@
     "buildconstanttree": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/fibonacci.const -p src/fibonacci.pil -s src/starkstruct.json -t build/fibonacci.consttree -v build/fibonacci.verkey.json",
     
     "sm2circuit": "node node_modules/pil-stark/src/main_pil2circom.js -p src/fibonacci.pil -s build/starkinfo.json -v build/fibonacci.verkey.json -o build/fibonacci.circom",
-    "circuitcompile": "circom build/fibonacci.circom --r1cs --wasm --sym -o build -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits",
+    "circuitcompile": "circom build/fibonacci.circom --r1cs --wasm -o build -l node_modules/pil-stark/circuits.bn128 -l node_modules/circomlib/circuits",
     "witnesscomputation": "snarkjs wc build/fibonacci_js/fibonacci.wasm src/input.json build/fibonacci.wtns",
     
     "downloadptau": "wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_20.ptau -O build/powersOfTau.ptau",
